@@ -1,0 +1,286 @@
+/* file: dir.tcss */
+
+/* Elegant color palette - sophisticated and refined */
+$base: #0d1117;        /* Deep charcoal base */
+$surface: #1c2128;     /* Subtle surface elevation */
+/*$border: #30363d;*/     /* Refined borders and dividers */
+
+
+$border-title: #7d8590;   /* border-title text color */
+$border: #282a2d;     /* Refined borders and dividers */
+$background: #0d1117;     /* Background */
+$list_text: #f0f6fc;      /* List item's text color */
+$focus:  #58a6ff ;      /* Elegant blue accent */
+
+
+$text: #e6edf3;        /* Crisp white text */
+$subtext0: #b1bac4;    /* Muted secondary text */
+$subtext1: #7d8590;    /* Tertiary text */
+
+$focus_muted: #388bfd; /* Deeper blue variant */
+$success: #a6e3a1;     /* Refined green */
+$warning: #d29922;     /* Sophisticated amber */
+$danger: #f85149;      /* Clean red */
+$highlight: #6e40c9;   /* Purple highlight */
+$subtle: #21262d;      /* Very subtle background variation */
+
+
+#home-sidebar {
+ border-title-color: $focus;
+}
+
+/* Footer */
+#footer {
+  width: 100%;
+  height: 12;
+  background: $background;
+  color: $subtext1;
+}
+
+#footer-left {
+  border-title-color: $border-title;
+  width: 33%;
+  height: 100%;
+  padding: 1 2;
+  border: round $border;
+  background: $background;
+}
+
+#footer-middle {
+  border-title-color: $border-title;
+  width: 1fr;
+  height: 100%;
+  padding: 1 2;
+  border: round $border;
+  background: $background;
+}
+
+#footer-right {
+  border-title-color: $border-title;
+  width: 33%;
+  height: 100%;
+  padding: 1 2;
+  border: round $border;
+  border-title-align: left;
+  background: $background;
+}
+
+/* Sidebar */
+#sidebar-container {
+  width: 20%;
+  min-width: 30;
+  height: 100%;
+  background: $background;
+  layout: vertical;
+}
+
+#home-sidebar {
+  padding: 1;
+  width: 100%;
+  min-width: 30;
+  height: 40%;
+  overflow-y: auto;
+  background: $background;
+  border: round $border;
+}
+
+#sidebar {
+  border-title-color: $border-title;
+  padding: 1;
+  width: 100%;
+  min-width: 30;
+  height: 60%;
+  overflow-y: auto;
+  background: $background;
+  border: round $border;
+}
+
+#home-sidebar:focus,
+#sidebar:focus {
+  border: round $focus;
+  background: $background;
+}
+
+/* File List */
+#file-list-container {
+  background: $background;
+  width: 40%;
+  min-width: 20;
+}
+
+#file-list-header {
+  border-title-color: $border-title;
+  width: 100%;
+  height: 3;
+  background: $background;
+  padding-left: 2;
+  color: $focus;
+  border: round $border;
+}
+
+#file-list {
+  padding: 1;
+  height: 1fr;
+  background: $background;
+  overflow-y: auto;
+  border: round $border;
+}
+
+#file-list:focus {
+  border: round $focus;
+  background: $background;
+}
+
+/* Preview Pane */
+#preview-pane {
+  border-title-color: $border-title;
+  width: 40%;
+  min-width: 40;
+  height: 100%;
+  background: $background;
+  padding: 1 4;
+  border: round $border;
+  border-title-align: left;
+}
+
+#preview-pane:focus {
+  border: round $focus;
+  background: $background;
+}
+
+/* List Items - Clean and elegant */
+ListItem {
+  padding: 0 1;
+  height: 1;
+  color: $text;
+  background: transparent !important;
+}
+
+ListItem:hover {
+  background: $border !important;
+  color: $text;
+}
+
+/* Active state with elegant accent */
+ListItem.-active {
+  background: transparent !important;
+  color: $focus;
+  text-style: bold;
+}
+
+/* Focus state */
+ListView:focus ListItem.-active {
+  background: transparent !important;
+  color: $focus_muted;
+}
+
+/* Custom highlight indicator */
+.highlight-indicator {
+  color: $list_text;
+  text-style: bold;
+}
+
+/* Selected items with refined styling */
+ListItem.selected {
+  background: $border;
+  color: $text;
+  text-style: bold;
+}
+
+/* cursor */
+ListItem.selected .highlight-indicator {
+  color: $focus;
+}
+
+/* Label Styling */
+Label {
+  color: $list_text;
+}
+
+ListItem.selected Label {
+  color: $focus;
+}
+
+/* Status Bar */
+#status {
+  background: $background;
+  color: $subtext1;
+  padding: 0 1;
+  height: 1;
+  border-top: round $border;
+}
+
+/* Confirmation Screen */
+ConfirmationScreen {
+  align: center middle;
+  layout: vertical;
+}
+
+ConfirmationScreen Label {
+  background: $background;
+  padding: 0 2;
+  border: vkey $danger;
+  color: $danger;
+}
+
+/* Search Screen */
+SearchScreen {
+  align: center top;
+  layout: vertical;
+  width: 50%;
+  /*background: $background;*/
+}
+
+SearchScreen Input {
+  width: 35%;
+  background: $background;
+  border: vkey $focus;
+  color: $text;
+}
+
+/* Add Item Screen */
+AddItemScreen {
+  align: center top;
+  layout: vertical;
+  width: 50%;
+  /*background: $background;*/
+}
+
+AddItemScreen Input {
+  width: 35%;
+  background: $background;
+  border: vkey $focus;
+  color: $text;
+}
+
+/* Keymap Help Screen */
+KeymapHelpScreen {
+  align: center middle;
+  layout: vertical;
+  width: 80%;
+  height: 100%;
+  background: $background;
+  /*padding: 2;*/
+}
+
+#keymap-title {
+  text-align: center;
+  text-style: bold;
+  color: $focus;
+  margin-bottom: 1;
+}
+
+#keymap-content {
+  width: 100%;
+  height: 1fr;
+  overflow-y: auto;
+  /*border: round $border;*/
+  padding: 1;
+  background: $background;
+  color: $text;
+}
+
+ListItem:disabled {
+  color: $subtext1;
+  text-style: bold;
+}

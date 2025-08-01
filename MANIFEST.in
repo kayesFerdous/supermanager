@@ -1,0 +1,2 @@
+include supermanager/dir.tcss
+recursive-include supermanager/scripts *
