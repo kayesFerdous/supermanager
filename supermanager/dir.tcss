@@ -201,6 +201,49 @@ ListItem.selected Label {
   color: $focus;
 }
 
+/* Permission Screen */
+PermissionScreen #perm-header {
+  color: $focus;
+  padding: 0 1;
+  text-style: bold;
+}
+
+PermissionScreen ListView:focus ListItem.-active {
+  background: $border;
+  color: $highlight;
+  text-style: bold;
+}
+
+PermissionScreen Input:focus {
+  border: vkey $focus;
+  color: $text;
+}
+
+/* Smaller centered modal styling for PermissionScreen */
+PermissionScreen {
+  width: 45%;
+  max-width: 60;
+  min-width: 30;
+  height: auto;
+  padding: 1 2;
+  border: round $border;
+  background: $background;
+  align: center middle;
+}
+
+PermissionScreen ListView {
+  height: auto;
+  max-height: 10;
+  border: round $border;
+  padding: 0 1;
+}
+
+PermissionScreen Input {
+  width: 100%;
+  margin-top: 1;
+}
+
+
 /* Status Bar */
 #status {
   background: $background;

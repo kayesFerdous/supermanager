@@ -95,3 +95,14 @@ def move_items(destination_dir):
     command = [script_path, destination_dir] + source_paths
     log_debug(f"Executing move command: {command}") # Debug print
     subprocess.run(command)
+
+def rename_item(old_path, new_name):
+    script_path = os.path.join(os.path.dirname(__file__), "scripts", "rename.sh")
+    subprocess.run([script_path, old_path, new_name])
+
+def change_permissions(mode, paths):
+    if not paths:
+        return
+    script_path = os.path.join(os.path.dirname(__file__), "scripts", "chmod_apply.sh")
+    log_debug(f"chmod {mode} -> {paths}")
+    subprocess.run([script_path, mode, *paths])

@@ -14,6 +14,8 @@ from supermanager.ui.fileicons import FILE_ICONS
 from .. import actions
 from .confirmation_screen import ConfirmationScreen
 from .add_item_screen import AddItemScreen
+from .rename_item_screen import RenameItemScreen
+from .permission_screen import PermissionScreen
 from .keymap_help_screen import KeymapHelpScreen
 from .search_screen import SearchScreen
 from .fileicons import FILE_ICONS
@@ -95,6 +97,8 @@ class DirViewerApp(App):
         self.bind("p", "paste_items", description="Paste")
         self.bind("m", "move_items", description="Move")
         self.bind("b", "pin_item", description="Bookmark")
+        self.bind("r", "rename_item", description="Rename")
+        self.bind("f7", "change_permissions", description="Chmod")
 
         # Selection
         self.bind("space", "toggle_selection", description="Select")
@@ -102,7 +106,7 @@ class DirViewerApp(App):
 
         # UI
         self.bind("H", "toggle_hidden", description="Toggle Hidden")
-        self.bind("f", "search", description="Search")
+        self.bind("s", "search", description="Search")
         self.bind("tab", "toggle_focus", description="Cycle Focus")
         self.bind("f1", "show_keymap_help", description="Help")
         self.bind("ctrl+t", "toggle_footer", description="Toggle Footer")
@@ -445,6 +449,40 @@ class DirViewerApp(App):
         actions.move_items(self.current_dir)
         await self.load_directory()
         await self.update_status_bar()
+
+    async def action_rename_item(self):
+        index = self.list_view.index
+        if index is None:
+            return
+        selected = self.list_view.children[index]
+        entry_type, name = selected.name.split("|", 1)
+        base_name = os.path.basename(name)
+
+        async def do_rename(new_name: str | None) -> None:
+            if new_name:
+                old_full_path = os.path.join(self.current_dir, base_name)
+                actions.rename_item(old_full_path, new_name)
+                await self.load_directory()
+                await self.update_status_bar()
+
+        self.push_screen(RenameItemScreen(base_name), do_rename)
+
+    async def action_change_permissions(self):
+        if self.selected_items:
+            targets = [os.path.join(self.current_dir, os.path.basename(item.name.split("|",1)[1])) for item in self.selected_items]
+        else:
+            idx = self.list_view.index
+            if idx is None:
+                return
+            targets = [os.path.join(self.current_dir, os.path.basename(self.list_view.children[idx].name.split("|",1)[1]))]
+
+        async def apply_mode(mode: str | None) -> None:
+            if mode:
+                actions.change_permissions(mode, targets)
+                await self.load_directory()
+                await self.update_status_bar()
+
+        self.push_screen(PermissionScreen(), apply_mode)
 
     async def update_home_sidebar(self):
         self.home_sidebar.clear()
